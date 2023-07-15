@@ -3,6 +3,8 @@
 #include "N5110.h" //N5110 LCD screen library
 #include "Joystick.h" //joystick library
 
+
+
 TMP102 temperature(PTE25, PTE24, 0x90); //the pinouts for tmp102 sensor
 N5110 lcd(PTC9,PTC0,PTC7,PTD2,PTD1,PTC11); // N5110 screen pinouts
 Joystick joystick(PTB10,PTB11,PTC16); // joystick pinouts
@@ -60,7 +62,7 @@ int MainMenuBB = 0;
 int MainMenuBC = 0;
 int MainMenuBD = 0;
 
-int SaveTemp1 = 0;
+int SaveTemp1 = 1; //Save first temperature
 int SaveTemp2 = 0;
 int SaveTemp3 = 0;
 int TempUp = 39;
