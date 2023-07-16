@@ -1,3 +1,12 @@
+/**
+
+@file main.cpp
+@brief Temperature Regulation Device
+This code implements a temperature regulation device using the mbed platform. It includes libraries for mbed, TMP102 temperature sensor, N5110 LCD screen, and a Joystick. The code sets up the necessary pinouts, flags, and menu options for the device.
+@date 2023-07-12
+*/
+
+
 #include "mbed.h" //mbed library
 #include "TMP102.h" //tmp102 library
 #include "N5110.h" //N5110 LCD screen library
@@ -62,7 +71,7 @@ int MainMenuBB = 0;
 int MainMenuBC = 0;
 int MainMenuBD = 0;
 
-int SaveTemp1 = 1; //Save first temperature
+int SaveTemp1 = 0; //Save first temperature
 int SaveTemp2 = 0;
 int SaveTemp3 = 0;
 int TempUp = 39;
@@ -123,6 +132,9 @@ lcd.printString("Temp Reg Device",5,0);
     MainMenuBB = 0;
     MainMenuBC = 0;
     MainMenuBD = 0;
+  
+  //printf("Return Main Menu");
+  
   wait_ms (2000); 
    
    LbuttonFlag = 1;
@@ -152,6 +164,9 @@ if (MainMenuAA == 1) {
         if (AbuttonFlag == 1) { 
         MainMenuAA = 0;
         MainMenuBA = 1;
+   
+    //printf("MenuBASelected");
+       
        wait_ms (2000);
         AbuttonFlag = 0;
 }
@@ -160,6 +175,9 @@ if (JoystickDirection == S) {
         MainMenuAA = 0;
         MainMenuAB = 1;  
         MainMenuAC = 0;
+
+        //printf("MenuABselected");
+       
        wait_ms (2000);  
         }
 
@@ -181,7 +199,9 @@ if (JoystickDirection == S) {
     lcd.printString("TempScan",0,0);
     char buffer1[17];
     int length = sprintf(buffer1,"Temp = %.2f\n C",temperature.read()); //temp value is read
-    //printf(length);
+    
+    //printf("Temperature: %s\n", buffer1);
+
     lcd.printString(buffer1,0,1);
     lcd.printString("R to save",0,3); //the button R will save the current temp
     lcd.refresh();
@@ -197,9 +217,14 @@ if (JoystickDirection == S) {
         MainMenuBB = 0;
         MainMenuBC = 0;
         MainMenuBD = 0;
+        
+      //printf("ReturntoMenuAA");
+
        wait_ms (2000);
         BbuttonFlag = 0; 
         } 
+
+        
         if (RbuttonFlag == 1) { 
         SaveTemp1 = temperature.read(); //temp is saved in "SaveTemp1"
        wait_ms (2000);
