@@ -227,6 +227,9 @@ if (JoystickDirection == S) {
         
         if (RbuttonFlag == 1) { 
         SaveTemp1 = temperature.read(); //temp is saved in "SaveTemp1"
+      
+        //printf("SavingTemp1: %d\n", SaveTemp1);
+      
        wait_ms (2000);
         XbuttonFlag = 0; 
         }
@@ -263,6 +266,10 @@ if (JoystickDirection == S) {
         MainMenuAA = 1;
         MainMenuAB = 0;  
         MainMenuAC = 0;
+        MainMenuAD = 0;
+
+    //printf("SelectedMenuAA");
+
        wait_ms (2000);  
         }
 
@@ -271,12 +278,18 @@ if (JoystickDirection == S) {
         MainMenuAB = 0;  
         MainMenuAC = 1;
         MainMenuAD = 0;
+
+     //printf("SelectedMenuAC");
+
        wait_ms (2000);  
         }
 
 if (AbuttonFlag == 1) { 
         MainMenuAB = 0;
         MainMenuBB = 1;
+
+    //printf("SelectedMenuBB");
+
        wait_ms (2000);
         AbuttonFlag = 0;
 }
@@ -342,6 +355,9 @@ if (MainMenuBB == 1){
        if (BbuttonFlag == 1) { 
         MainMenuBB = 0;
         MainMenuAB = 1;
+
+//printf("SelectedMenuAB");
+
        wait_ms (2000);
         BbuttonFlag = 0; 
         }
@@ -367,6 +383,9 @@ if (MainMenuAC == 1) {
  if (AbuttonFlag == 1) {
         MainMenuAC = 0;
         MainMenuBC = 1;
+
+//printf("SelectedMenuBC");
+
        wait_ms (2000);
         AbuttonFlag = 0;
 
@@ -391,6 +410,9 @@ if (MainMenuBC == 1){
        if (BbuttonFlag == 1) { 
         MainMenuBC = 0;
         MainMenuAC = 1;
+
+    //printf("SelectedMenuAC");
+
        wait_ms (2000);
         BbuttonFlag = 0; 
         }
@@ -417,6 +439,9 @@ if (MainMenuAD == 1) {
 if (AbuttonFlag == 1) { 
         MainMenuAD = 0;
         MainMenuBD = 1;
+
+//printf("SelectedMenuBD");
+
        wait_ms (2000);
         AbuttonFlag = 0;
 }
