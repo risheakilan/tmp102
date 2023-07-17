@@ -440,7 +440,7 @@ if (AbuttonFlag == 1) {
         MainMenuAD = 0;
         MainMenuBD = 1;
 
-//printf("SelectedMenuBD");
+//printf("SelectedMenuBD");;
 
        wait_ms (2000);
         AbuttonFlag = 0;
