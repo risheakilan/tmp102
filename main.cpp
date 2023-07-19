@@ -13,10 +13,11 @@ This code implements a temperature regulation device using the mbed platform. It
 #include "Joystick.h" //joystick library
 
 
-
+//outputs
 TMP102 temperature(PTE25, PTE24, 0x90); //the pinouts for tmp102 sensor
 N5110 lcd(PTC9,PTC0,PTC7,PTD2,PTD1,PTC11); // N5110 screen pinouts
 Joystick joystick(PTB10,PTB11,PTC16); // joystick pinouts
+DigitalOut buzzerPin(PTA1); //buzzer pinout
 DigitalOut Led1(PTA1);//pinout for led 1 
 DigitalOut Led2(PTA2);//pinout for led 2
 DigitalOut Led3(PTC2);//pinout for led 3 
@@ -85,6 +86,10 @@ Led2 = 0;
 Led3 = 0;
 
 float celsius, fahrenheit;
+
+float frequency = 659.0; // Frequency in Hz for A4 note
+
+buzzerPin.period(1.0 / frequency);
 
 Abutton.rise(&AbuttonPressed); //this ensures that the button is pressed
 Abutton.mode(PullDown); //this line ensures that the pull-down resistor is used when the button is not pressed
@@ -326,29 +331,53 @@ if (MainMenuBB == 1){
        
        if (SaveTemp1 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
         Led1Flip();
+        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
+            buzzerPin = 0.5;              // Set the initial duty cycle
+            wait(1.0);
+            buzzerPin = 0.0; // turn off audio**
         }
        
         
        if (SaveTemp2 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
         Led1Flip();
+        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
+            buzzerPin = 0.5;              // Set the initial duty cycle
+            wait(1.0);
+            buzzerPin = 0.0; // turn off audio**
         }
 
          
        if (SaveTemp3 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
         Led1Flip();
+        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
+            buzzerPin = 0.5;              // Set the initial duty cycle
+            wait(1.0);
+            buzzerPin = 0.0; // turn off audio**
         }
        
         
        if (SaveTemp1 < TempDown ) { //if the saved temperature is below the temperature threshold then LED2 will turn on
         Led2Flip();
+        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
+            buzzerPin = 0.5;              //Set the initial duty cycle
+            wait(1.0);
+            buzzerPin = 0.0; // turn off audio**
         }
 
        if (SaveTemp2 < TempDown ) { //if the saved temperature is above the temperature threshold then LED2 will turn on
         Led2Flip();
+        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
+            buzzerPin = 0.5;              // Set the initial duty cycle
+            wait(1.0);
+            buzzerPin = 0.0; // turn off audio**
         }
 
         if (SaveTemp3 < TempDown ) { //if the saved temperature is above the temperature threshold then LED2 will turn on
         Led2Flip();
+        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
+            buzzerPin = 0.5;              // Set the initial duty cycle
+            wait(1.0);
+            buzzerPin = 0.0; // turn off audio**
         }
        
        
