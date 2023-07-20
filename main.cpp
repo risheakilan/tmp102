@@ -21,9 +21,6 @@ DigitalOut buzzerPin(PTA1); //buzzer pinout
 DigitalOut Led1(PTA1);//pinout for led 1 
 DigitalOut Led2(PTA2);//pinout for led 2
 DigitalOut Led3(PTC2);//pinout for led 3 
-DigitalOut Led4(PTC3);//pinout for led 4 
-DigitalOut Led5(PTC4);//pinout for led 5 
-DigitalOut Led6(PTD3);//pinout for led 6 
 InterruptIn Abutton(PTB9);//pinout for button A
 InterruptIn Bbutton(PTD0);//pinout for button B
 InterruptIn Ybutton(PTC12);//pinout for button Y
@@ -66,17 +63,17 @@ void RbuttonPressed() {
 int MainMenuAA = 1; //Menu Option AA "Read Temp", this will enable the sensor to read the current temperature
 int MainMenuAB = 0; //Menu Option AB "SaveCurrentTemp", this will enable the option to save the current temperature
 int MainMenuAC = 0; //Menu Option AC "TempThreshold", will enable the option to adjust the thershold of the temp
-int MainMenuAD = 0;
-int MainMenuBA = 0; 
+int MainMenuAD = 0; //Menu Option AD "View in Fahreheit" will enable the option to view the current temparture in fahrenheit. 
+int MainMenuBA = 0; //Menu Option BA 
 int MainMenuBB = 0;
 int MainMenuBC = 0;
 int MainMenuBD = 0;
 
 int SaveTemp1 = 0; //Save first temperature
-int SaveTemp2 = 0;
-int SaveTemp3 = 0;
-int TempUp = 39;
-int TempDown = 30;
+int SaveTemp2 = 0; //Save second temperature 
+int SaveTemp3 = 0; //Save third temperature 
+int TempUp = 39; //temperature upper limit 
+int TempDown = 30; //tempreature lower limit 
 
 
 
@@ -132,11 +129,11 @@ lcd.printString("Temp Reg Device",5,0);
     MainMenuAA = 1; //this ensures that main menu is selected
     MainMenuAB = 0; //this ensures that this menu is not selected since the value is 0 
     MainMenuAC = 0; //this ensures that this menu is not selected since the value is 0 
-    MainMenuAD = 0;
-    MainMenuBA = 0;
-    MainMenuBB = 0;
-    MainMenuBC = 0;
-    MainMenuBD = 0;
+    MainMenuAD = 0; //this ensures that this menu is not selected since the value is 0 
+    MainMenuBA = 0; //this ensures that this menu is not selected since the value is 0 
+    MainMenuBB = 0; //this ensures that this menu is not selected since the value is 0 
+    MainMenuBC = 0; //this ensures that this menu is not selected since the value is 0 
+    MainMenuBD = 0; //this ensures that this menu is not selected since the value is 0 
   
   //printf("Return Main Menu");
   
