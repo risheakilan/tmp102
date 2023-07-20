@@ -17,7 +17,7 @@ This code implements a temperature regulation device using the mbed platform. It
 TMP102 temperature(PTE25, PTE24, 0x90); //the pinouts for tmp102 sensor
 N5110 lcd(PTC9,PTC0,PTC7,PTD2,PTD1,PTC11); // N5110 screen pinouts
 Joystick joystick(PTB10,PTB11,PTC16); // joystick pinouts
-DigitalOut buzzerPin(PTA1); //buzzer pinout
+PwmOut buzzerPin(PTA1); //buzzer pinout
 DigitalOut Led1(PTA1);//pinout for led 1 
 DigitalOut Led2(PTA2);//pinout for led 2
 DigitalOut Led3(PTC2);//pinout for led 3 
@@ -63,17 +63,17 @@ void RbuttonPressed() {
 int MainMenuAA = 1; //Menu Option AA "Read Temp", this will enable the sensor to read the current temperature
 int MainMenuAB = 0; //Menu Option AB "SaveCurrentTemp", this will enable the option to save the current temperature
 int MainMenuAC = 0; //Menu Option AC "TempThreshold", will enable the option to adjust the thershold of the temp
-int MainMenuAD = 0; //Menu Option AD "View in Fahreheit" will enable the option to view the current temparture in fahrenheit. 
-int MainMenuBA = 0; //Menu Option BA 
-int MainMenuBB = 0;
-int MainMenuBC = 0;
-int MainMenuBD = 0;
+int MainMenuAD = 0; //Menu Option AD "View in Fahreheit" will enable the option to view the current temparture in either celsius or fahrenheit. 
+int MainMenuBA = 0; //Menu Option BA will allow the user to perform a temperature scan and obtain a reading 
+int MainMenuBB = 0; //Menu Option BB will allow the user to view the three saved temperatures 
+int MainMenuBC = 0; //Menu Option BC will allow the user to change the limits of the fever threshold. 
+int MainMenuBD = 0; //Menu Option BD will allow the user to change the units of the current temperature measured. 
 
 int SaveTemp1 = 0; //Save first temperature
 int SaveTemp2 = 0; //Save second temperature 
 int SaveTemp3 = 0; //Save third temperature 
-int TempUp = 39; //temperature upper limit 
-int TempDown = 30; //tempreature lower limit 
+int TempUp = 39; //Preset temperature upper limit 
+int TempDown = 30; //Preset tempreature lower limit 
 
 
 
@@ -87,7 +87,6 @@ float celsius, fahrenheit;
 float frequency = 659.0; // Frequency in Hz for A4 note
 
 buzzerPin.period(1.0 / frequency);
-
 Abutton.rise(&AbuttonPressed); //this ensures that the button is pressed
 Abutton.mode(PullDown); //this line ensures that the pull-down resistor is used when the button is not pressed
 Bbutton.rise(&BbuttonPressed);//this ensures that the button is pressed
