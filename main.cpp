@@ -239,6 +239,8 @@ lcd.printString("Temp Reg Device",5,0);
  
  
 if (MainMenuAA == 1) {
+
+    // Display sub-menu options
     lcd.clear();
     lcd.printString("1.=ViewCurrentTemp",0,0);
     lcd.printString("2.ViewTempHistory",0,1);
@@ -410,58 +412,24 @@ if (MainMenuBB == 1){
 
 }
        
-       if (SaveTemp1 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
-        Led1Flip(); // will toggle the state of Led1. Since it is set as 0, the Led will turn on
-        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
-            buzzerPin = 0.5;              // Set the initial duty cycle
+       if (SaveTemp1 > TempUp || SaveTemp2 > TempUp || SaveTemp3 > TempUp) { //if the saved temperature is above the temperature threshold then LED1 will turn on
+            Led1Flip(); // will toggle the state of Led1. Since it is set as 0, the Led will turn on
+            buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
+            buzzerPin = 0.5;  // Set the initial duty cycle
             wait(1.0);
             buzzerPin = 0.0; // buzzer turns off 
+    
         }
        
-        
-       if (SaveTemp2 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
-        Led1Flip(); // will toggle the state of Led1. Since it is set as 0, the Led will turn on
-        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
-            buzzerPin = 0.5;              // Set the initial duty cycle
-            wait(1.0);
-            buzzerPin = 0.0; // turn off audio**
-        }
-
-         
-       if (SaveTemp3 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
-        Led1Flip(); // will toggle the state of Led1. Since it is set as 0, the Led will turn on
-        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
-            buzzerPin = 0.5;              // Set the initial duty cycle
-            wait(1.0);
-            buzzerPin = 0.0; // buzzer turns off 
-        }
-       
-        
-       if (SaveTemp1 < TempDown ) { //if the saved temperature is below the temperature threshold then LED2 will turn on
-        Led2Flip(); // will toggle the state of Led2. Since it is set as 0, the Led will turn on
-        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
+       if (SaveTemp1 < TempDown || SaveTemp2 < TempDown|| SaveTemp3 < TempDown) { //if the saved temperature is below the temperature threshold then LED2 will turn on
+           Led2Flip(); // will toggle the state of Led2. Since it is set as 0, the Led will turn on
+           buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
             buzzerPin = 0.5;              //Set the initial duty cycle
             wait(1.0);
             buzzerPin = 0.0; // buzzer turns off 
         }
+        
 
-       if (SaveTemp2 < TempDown ) { //if the saved temperature is above the temperature threshold then LED2 will turn on
-        Led2Flip(); // will toggle the state of Led2. Since it is set as 0, the Led will turn on
-        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
-            buzzerPin = 0.5;              // Set the initial duty cycle
-            wait(1.0);
-            buzzerPin = 0.0; // buzzer turns off 
-        }
-
-        if (SaveTemp3 < TempDown ) { //if the saved temperature is above the temperature threshold then LED2 will turn on
-        Led2Flip(); // will toggle the state of Led2. Since it is set as 0, the Led will turn on
-        buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
-            buzzerPin = 0.5;              // Set the initial duty cycle
-            wait(1.0);
-            buzzerPin = 0.0; // buzzer turns off 
-        }
-       
-       
        if (BbuttonFlag == 1) { //when button B is pressed 
         MainMenuBB = 0;
         MainMenuAB = 1; //Main Menu AB is displayed 
