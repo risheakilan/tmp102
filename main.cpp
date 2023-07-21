@@ -17,10 +17,10 @@ This code implements a temperature regulation device using the mbed platform. It
 TMP102 temperature(PTE25, PTE24, 0x90); //the pinouts for tmp102 sensor
 N5110 lcd(PTC9,PTC0,PTC7,PTD2,PTD1,PTC11); // N5110 screen pinouts
 Joystick joystick(PTB10,PTB11,PTC16); // joystick pinouts
-PwmOut buzzerPin(PTA1); //buzzer pinout
-DigitalOut Led1(PTA1);//pinout for led 1 
-DigitalOut Led2(PTA2);//pinout for led 2
-DigitalOut Led3(PTC2);//pinout for led 3 
+PwmOut buzzerPin(PTB20); //buzzer pinout
+DigitalOut Led1(PTB22);//pinout for led 1 
+DigitalOut Led2(PTB21);//pinout for led 2
+DigitalOut Led3(PTE26);//pinout for led 3 
 InterruptIn Abutton(PTB9);//pinout for button A
 /**
  * @brief The interruptIn object is used to handle events whenever A button is pressed
@@ -397,7 +397,6 @@ if (MainMenuBB == 1){
     char buffer3[17];
     int length = sprintf(buffer3,"Temp = %.2d\n C",SaveTemp1);
     lcd.printString(buffer3,0,1);
-
 
     lcd.printString("SaveTemp2 ",0,2);
     char buffer4[17];
