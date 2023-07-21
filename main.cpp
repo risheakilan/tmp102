@@ -3,7 +3,7 @@
 @file main.cpp
 @brief Temperature Regulation Device
 This code implements a temperature regulation device using the mbed platform. It includes libraries for mbed, TMP102 temperature sensor, N5110 LCD screen, and a Joystick. The code sets up the necessary pinouts, flags, and menu options for the device.
-@date 2023-07-12
+@date 2023-07-31
 */
 
 
@@ -22,6 +22,10 @@ DigitalOut Led1(PTA1);//pinout for led 1
 DigitalOut Led2(PTA2);//pinout for led 2
 DigitalOut Led3(PTC2);//pinout for led 3 
 InterruptIn Abutton(PTB9);//pinout for button A
+/**
+ * @brief The interruptIn object is used to handle events whenever A button is pressed
+ */
+
 InterruptIn Bbutton(PTD0);//pinout for button B
 InterruptIn Ybutton(PTC12);//pinout for button Y
 InterruptIn Xbutton(PTC17);//pinout for button X
@@ -35,15 +39,28 @@ volatile int XbuttonFlag = 0;//the value 0 indicates that the button to this fla
 volatile int LbuttonFlag = 0;//the value 0 indicates that the button to this flag has not been pressed
 volatile int RbuttonFlag = 0;//the value 0 indicates that the button to this flag has not been pressed
 
+
 void Led1Flip() {
-     Led1 = !Led1;
+     Led1 = !Led1; 
+
 }
+
+/**
+ * @brief this function will toggle the state of the Led, i.e turn it on. 
+ */
+
 void Led2Flip() {
      Led2 = !Led2;
 }
 void AbuttonPressed() {
-     AbuttonFlag = 1; //to assign a value of 1 meaning that the button is pressed
+     AbuttonFlag = 1; 
 }
+
+/**
+ * @brief this function is called whenever the button A is pressed
+ * It will set the AbuttonFlag to 1 showing that the button is pressed.
+ */
+
 void BbuttonPressed() {
      BbuttonFlag = 1; //to assign a value of 1 meaning that the button is pressed
 }
@@ -84,11 +101,34 @@ Led3 = 0;
 
 float celsius, fahrenheit;
 
-float frequency = 659.0; // Frequency in Hz for A4 note
+float frequency = 659.0; 
+
+
 
 buzzerPin.period(1.0 / frequency);
+
+/**
+ * @brief Set the period for the buzzer.
+ *
+ * The period is calculated by dividing 1.0 by the frequency value.
+ * The frequency value manages the frequency in Hz for the A4 note.
+ */
+
 Abutton.rise(&AbuttonPressed); //this ensures that the button is pressed
-Abutton.mode(PullDown); //this line ensures that the pull-down resistor is used when the button is not pressed
+
+/**
+ * @brief rising edge is when a button is pressed
+ * When button A is pressed, the AbuttonPressed function will be called.
+ */
+
+Abutton.mode(PullDown); 
+
+/**
+ * @brief Configure button A pin mode as PullDown.
+ * A pulldown resistor is used to ensure that the button is pulled to ground when not pressed.  
+ * 
+ */
+
 Bbutton.rise(&BbuttonPressed);//this ensures that the button is pressed
 Bbutton.mode(PullDown);//this line ensures that the pull-down resistor is used when the button is not pressed
 Ybutton.rise(&YbuttonPressed);//this ensures that the button is pressed
@@ -101,13 +141,58 @@ Rbutton.rise(&RbuttonPressed);//this ensures that the button is pressed
 Rbutton.mode(PullDown);//this line ensures that the pull-down resistor is used when the button is not pressed
 
 joystick.init(); //initialises the joysitck
-lcd.init(); //initialises the lcd screen
-lcd.setContrast(0.5); //controls the visibility of the LCD by adjusting the contrast
-lcd.normalMode(); //intructs the LCD to operate in its normal settings
+
+/**
+ * @brief Initializes the joystick.
+ */
+
+lcd.init(); 
+
+/**
+ * @brief Initializes the LCD screen.
+ */
+
+lcd.setContrast(0.5); 
+
+/**
+ * @brief Controls the visibility of the LCD by adjusting the contrast.
+ * The lowest contrast value is 0 (dimmest) and the highest contrast value is 1 (brightest)
+ */
+
+lcd.normalMode(); 
+
+/**
+ * @brief Instructs the LCD to operate in its normal mode.
+ */
+
 lcd.setBrightness(0.5); //sets the LCD brightness
+
+/**
+ * @brief Sets the brightness level of the LCD screen.
+ * The brightness value ranges from 0 to 1, with 0 being the lowest brightness and 1 being the highest brightness.
+ */
+
+
 lcd.refresh();
-wait_ms(3000); // wait for 3 seconds for the welcome screen
+
+/**
+ * @brief Refreshes the content on the LCD screen.
+ */
+
+
+wait_ms(3000); 
+
+/**
+ * @brief Delays program execution for 3 seconds.
+ * It is used here to display the welcome screen for 3 seconds before proceeding further.
+ */
+
+
 lcd.clear();
+
+/**
+ * @brief Clears the content on the LCD screen and resets the screen's buffer.
+ */
 
 lcd.printString("Temp Reg Device",5,0); 
 
@@ -210,8 +295,8 @@ if (JoystickDirection == S) {
  }
         
         if (BbuttonFlag == 1) { //if B button is pressed, the user is returned to previous menu 
-        MainMenuAA = 1; //Previous Menu screen is shown
-        MainMenuAB = 0;
+        MainMenuAA = 1; //Previous Menu screen is displayed
+        MainMenuAB = 0; 
         MainMenuAC = 0;
         MainMenuAD = 0;
         MainMenuBA = 0;
@@ -264,7 +349,7 @@ if (JoystickDirection == S) {
 
 //When the joystick is moved to the north 
  if (JoystickDirection == N) {
-        MainMenuAA = 1;
+        MainMenuAA = 1; //Main Menu AA is displayed 
         MainMenuAB = 0;  
         MainMenuAC = 0;
         MainMenuAD = 0;
@@ -277,7 +362,7 @@ if (JoystickDirection == S) {
 if (JoystickDirection == S) {
         MainMenuAA = 0;
         MainMenuAB = 0;  
-        MainMenuAC = 1;
+        MainMenuAC = 1; //Main Menu AC is displayed 
         MainMenuAD = 0;
 
      //printf("SelectedMenuAC");
@@ -287,7 +372,7 @@ if (JoystickDirection == S) {
 
 if (AbuttonFlag == 1) { 
         MainMenuAB = 0;
-        MainMenuBB = 1;
+        MainMenuBB = 1; //Main Menu BB is displayed 
 
     //printf("SelectedMenuBB");
 
@@ -326,16 +411,16 @@ if (MainMenuBB == 1){
 }
        
        if (SaveTemp1 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
-        Led1Flip();
+        Led1Flip(); // will toggle the state of Led1. Since it is set as 0, the Led will turn on
         buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
             buzzerPin = 0.5;              // Set the initial duty cycle
             wait(1.0);
-            buzzerPin = 0.0; // turn off audio**
+            buzzerPin = 0.0; // buzzer turns off 
         }
        
         
        if (SaveTemp2 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
-        Led1Flip();
+        Led1Flip(); // will toggle the state of Led1. Since it is set as 0, the Led will turn on
         buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
             buzzerPin = 0.5;              // Set the initial duty cycle
             wait(1.0);
@@ -344,42 +429,42 @@ if (MainMenuBB == 1){
 
          
        if (SaveTemp3 > TempUp ) { //if the saved temperature is above the temperature threshold then LED1 will turn on
-        Led1Flip();
+        Led1Flip(); // will toggle the state of Led1. Since it is set as 0, the Led will turn on
         buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
             buzzerPin = 0.5;              // Set the initial duty cycle
             wait(1.0);
-            buzzerPin = 0.0; // turn off audio**
+            buzzerPin = 0.0; // buzzer turns off 
         }
        
         
        if (SaveTemp1 < TempDown ) { //if the saved temperature is below the temperature threshold then LED2 will turn on
-        Led2Flip();
+        Led2Flip(); // will toggle the state of Led2. Since it is set as 0, the Led will turn on
         buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
             buzzerPin = 0.5;              //Set the initial duty cycle
             wait(1.0);
-            buzzerPin = 0.0; // turn off audio**
+            buzzerPin = 0.0; // buzzer turns off 
         }
 
        if (SaveTemp2 < TempDown ) { //if the saved temperature is above the temperature threshold then LED2 will turn on
-        Led2Flip();
+        Led2Flip(); // will toggle the state of Led2. Since it is set as 0, the Led will turn on
         buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
             buzzerPin = 0.5;              // Set the initial duty cycle
             wait(1.0);
-            buzzerPin = 0.0; // turn off audio**
+            buzzerPin = 0.0; // buzzer turns off 
         }
 
         if (SaveTemp3 < TempDown ) { //if the saved temperature is above the temperature threshold then LED2 will turn on
-        Led2Flip();
+        Led2Flip(); // will toggle the state of Led2. Since it is set as 0, the Led will turn on
         buzzerPin.period(1.0 / frequency); // frequncy value is defined in main loop
             buzzerPin = 0.5;              // Set the initial duty cycle
             wait(1.0);
-            buzzerPin = 0.0; // turn off audio**
+            buzzerPin = 0.0; // buzzer turns off 
         }
        
        
-       if (BbuttonFlag == 1) { 
+       if (BbuttonFlag == 1) { //when button B is pressed 
         MainMenuBB = 0;
-        MainMenuAB = 1;
+        MainMenuAB = 1; //Main Menu AB is displayed 
 
 //printf("SelectedMenuAB");
 
@@ -407,7 +492,7 @@ if (MainMenuAC == 1) {
 
  if (AbuttonFlag == 1) {
         MainMenuAC = 0;
-        MainMenuBC = 1;
+        MainMenuBC = 1; //Main Menu BC is displayed 
 
 //printf("SelectedMenuBC");
 
@@ -434,7 +519,7 @@ if (MainMenuBC == 1){
        
        if (BbuttonFlag == 1) { 
         MainMenuBC = 0;
-        MainMenuAC = 1;
+        MainMenuAC = 1; //Main Menu AC is displayed 
 
     //printf("SelectedMenuAC");
 
@@ -451,7 +536,7 @@ if (MainMenuBC == 1){
 
 
 
-if (MainMenuAD == 1) {
+if (MainMenuAD == 1) { 
     lcd.clear();
     lcd.printString("1.ViewCurrentTemp",0,0);
     lcd.printString("2.ViewTempHist",0,1);
@@ -463,7 +548,7 @@ if (MainMenuAD == 1) {
  
 if (AbuttonFlag == 1) { 
         MainMenuAD = 0;
-        MainMenuBD = 1;
+        MainMenuBD = 1; //Main Menu BD is displayed 
 
 //printf("SelectedMenuBD");;
 
@@ -478,10 +563,10 @@ if (MainMenuBD == 1){
 lcd.printString("CelsiusandFahrenheit",0,0);
  
  celsius = temperature.read();
- fahrenheit = (celsius * 9.0 / 5.0) + 32.0;
+ fahrenheit = (celsius * 9.0 / 5.0) + 32.0; //the conversion formula from celsius to fahrenheit
 
 char buffer1[17];
-int length6 = printf(buffer1,"Temp = %.2f\n C",temperature.read(), celsius, fahrenheit);
+int length6 = printf(buffer1,"Temp = %.2f\n C",temperature.read(), celsius, fahrenheit); //the temperature will be printed in both celsius and fahreheit 
 }
   
   
