@@ -6,6 +6,32 @@ This code implements a temperature regulation device using the mbed platform. It
 @date 2023-07-31
 */
 
+/**
+ * Library for the TI TMP102 temperature sensor.
+ * The TMP102 is an I2C digital temperature sensor in a small SOT563 package, with a 0.0625C resolution and 0.5C accuracy.
+ Copyright (c) 2010 Donatien Garnier (donatiengar [at] gmail [dot] com)
+ */
+
+/** Joystick Class
+@author Dr Craig A. Evans, University of Leeds
+@brief  Library for interfacing with analogue joystick
+*/
+
+/** N5110 Class
+@brief Library for interfacing with Nokia 5110 LCD display (https://www.sparkfun.com/products/10168) using the hardware SPI on the mbed.
+@brief The display is powered from a GPIO pin meaning it can be controlled via software.  The LED backlight is also software-controllable (via PWM pin).
+@brief Can print characters and strings to the display using the included 5x7 font.
+@brief The library also implements a screen buffer so that individual pixels on the display (84 x 48) can be set, cleared and read.
+@brief The library can print primitive shapes (lines, circles, rectangles)
+@brief Acknowledgements to Chris Yan's Nokia_5110 Library.
+
+@brief Revision 1.3
+
+@author Craig A. Evans
+@date   7th February 2017
+
+*/
+
 
 #include "mbed.h" //mbed library
 #include "TMP102.h" //tmp102 library
@@ -57,7 +83,8 @@ void AbuttonPressed() {
 }
 
 /**
- * @brief this function is called whenever the button A is pressed
+ * 
+@brief this function is called whenever the button A is pressed
  * It will set the AbuttonFlag to 1 showing that the button is pressed.
  */
 
@@ -479,7 +506,7 @@ if (MainMenuBC == 1){
     lcd.printString(buffer6,0,2);
     lcd.printString("LowerTemp",0,3);
     char buffer7[17];
-    int length1 = sprintf(buffer7,"  %d\n C",TempDown);
+    int length1 = sprintf(buffer7,"< %d\n C",TempDown);
     lcd.printString(buffer7,0,4);
     lcd.refresh();
 }
