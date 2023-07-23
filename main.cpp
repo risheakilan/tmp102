@@ -366,6 +366,7 @@ if (JoystickDirection == S) {
  
  if (MainMenuAB == 1) {
     lcd.clear();
+//display sub menu 
     lcd.printString("1.ViewCurrentTemp",0,0);
     lcd.printString("2.=ViewTempHist",0,1);
     lcd.printString("3.SetFeverLimit",0,2);
