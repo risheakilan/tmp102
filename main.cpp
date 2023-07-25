@@ -236,6 +236,7 @@ int main() {
     }
 
     if (MainMenuAA == 1) {
+        //printf("Entering MainMenuAA");
 
       // Display sub-menu options
       lcd.clear();
@@ -256,10 +257,20 @@ int main() {
         AbuttonFlag = 0;
       }
 
+      /**
+ * @brief Checks the direction of the joystick and updates the main menu options accordingly.
+ *
+ * This function enables the joystick direction to be south.
+ * it sets MainMenuAA to 0, MainMenuAB to 1, and MainMenuAC to 0. This means that Menu Option AB
+ * is selected while the other options (AA and AC) are not selected.
+ *
+ * @param JoystickDirection s stands for south, n - north, w - west, e - east. 
+ */
+
       if (JoystickDirection == S) {
-        MainMenuAA = 0;
-        MainMenuAB = 1;
-        MainMenuAC = 0;
+        MainMenuAA = 0; //Main Menu AA is not selected
+        MainMenuAB = 1; //Main Menu AB is selected 
+        MainMenuAC = 0; //Main Menu AC is not selected
 
         //printf("MenuABselected");
 
@@ -269,6 +280,7 @@ int main() {
     }
 
     if (MainMenuBA == 1) {
+    //printf("Entering MainMenuBA");
       lcd.clear();
       lcd.printString("TempScan", 0, 0);
       char buffer1[17];
@@ -308,6 +320,7 @@ int main() {
     }
 
     if (MainMenuAB == 1) {
+    //printf("Entering MainMenuAB");
       lcd.clear();
       //display sub menu 
       lcd.printString("1.ViewCurrentTemp", 0, 0);
@@ -354,6 +367,7 @@ int main() {
     }
 
     if (MainMenuBB == 1) {
+    //printf("Entering MainMenuBB");
       lcd.clear();
       lcd.printString("SaveTemp1 ", 0, 0);
       char buffer3[17];
@@ -401,6 +415,7 @@ int main() {
     }
 
     if (MainMenuAC == 1) {
+        //printf("Entering MainMenuAC");
       lcd.clear();
       lcd.printString("1.ViewCurrentTemp", 0, 0);
       lcd.printString("2.ViewTempHist", 0, 1);
@@ -421,6 +436,7 @@ int main() {
     }
 
     if (MainMenuBC == 1) {
+     //printf("Entering MainMenuBC");
       lcd.clear();
       lcd.printString("UpperTemp", 0, 0);
       char buffer6[17];
@@ -445,6 +461,7 @@ int main() {
     }
 
     if (MainMenuAD == 1) {
+        //printf("Entering MainMenuAD");
       lcd.clear();
       lcd.printString("1.ViewCurrentTemp", 0, 0);
       lcd.printString("2.ViewTempHist", 0, 1);
