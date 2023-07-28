@@ -331,6 +331,9 @@ int main() {
       lcd.refresh();
     }
 
+    /**
+ * @brief Get joystick direction
+*/
     Direction JoystickDirection = joystick.get_direction();
     //printf(JoystickDirection);
 
@@ -356,7 +359,10 @@ int main() {
 
       wait_ms(2000);
     }
-
+    
+    /**
+    * @brief Go to temp history menu if A button pressed
+    */
     if (AbuttonFlag == 1) {
       MainMenuAB = 0;
       MainMenuBB = 1; //Main Menu BB is displayed 
@@ -368,7 +374,13 @@ int main() {
     }
 
     if (MainMenuBB == 1) {
+    
     //printf("Entering MainMenuBB");
+
+    /**
+    * @brief Show saved temperature history
+    */
+
       lcd.clear();
       lcd.printString("SaveTemp1 ", 0, 0);
       char buffer3[17];
