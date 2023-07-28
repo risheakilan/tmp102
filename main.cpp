@@ -7,7 +7,7 @@ This code implements a temperature regulation device using the mbed platform. It
 */
 
 /**
- * Library for the TI TMP102 temperature sensor.
+ * Library for the T1 TMP102 temperature sensor.
  * The TMP102 is an I2C digital temperature sensor in a small SOT563 package, with a 0.0625C resolution and 0.5C accuracy.
  Copyright (c) 2010 Donatien Garnier (donatiengar [at] gmail [dot] com)
  */
@@ -32,6 +32,7 @@ This code implements a temperature regulation device using the mbed platform. It
 
 */
 
+
 #include "mbed.h" //mbed library
 
 #include "TMP102.h" //tmp102 library
@@ -45,7 +46,7 @@ This code implements a temperature regulation device using the mbed platform. It
 TMP102 temperature(PTE25, PTE24, 0x90); //the pinouts for tmp102 sensor
 N5110 lcd(PTC9, PTC0, PTC7, PTD2, PTD1, PTC11); // N5110 screen pinouts
 Joystick joystick(PTB10, PTB11, PTC16); // joystick pinouts
-PwmOut buzzerPin(PTB20); //buzzer pinout
+PwmOut buzzerPin(PTB23); //buzzer pinout
 DigitalOut Led1(PTB22); //pinout for led 1 
 DigitalOut Led2(PTB21); //pinout for led 2
 DigitalOut Led3(PTE26); //pinout for led 3 
@@ -428,10 +429,14 @@ int main() {
       MainMenuAC = 0;
       MainMenuBC = 1; //Main Menu BC is displayed 
 
+    /**
+    * @brief Go to Menu BC if A button pressed
+    */ 
+
       //printf("SelectedMenuBC");
 
       wait_ms(2000);
-      AbuttonFlag = 0;
+      AbuttonFlag = 0; //clears the flag
 
     }
 
@@ -453,6 +458,10 @@ int main() {
     if (BbuttonFlag == 1) {
       MainMenuBC = 0;
       MainMenuAC = 1; //Main Menu AC is displayed 
+
+      /**
+    * @brief Go to Menu AC if B button pressed
+    */ 
 
       //printf("SelectedMenuAC");
 
@@ -480,11 +489,15 @@ int main() {
       AbuttonFlag = 0;
     }
 
+    /**
+    * @brief Show temperature in C and F
+    */
+
     if (MainMenuBD == 1) {
 
       lcd.printString("CelsiusandFahrenheit", 0, 0);
 
-      celsius = temperature.read();
+      celsius = temperature.read(); //read the current temperature in celsius 
       fahrenheit = (celsius * 9.0 / 5.0) + 32.0; //the conversion formula from celsius to fahrenheit
 
       char buffer1[17];
